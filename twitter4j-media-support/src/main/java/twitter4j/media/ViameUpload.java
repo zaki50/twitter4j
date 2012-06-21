@@ -51,7 +51,11 @@ class ViameUpload extends AbstractImageUploadImpl {
             JSONObject json = new JSONObject(response);
             json = json.getJSONObject("response");
             json = json.getJSONObject("post");
-            return json.getString("id");
+            String postId = json.getString("id");
+            if (postId == null || postId.length() == 0) {
+                throw new TwitterException("Invalid via.me response: " + response);
+            }
+            return postId;
         } catch (JSONException e) {
             throw new TwitterException("Invalid via.me response: " + response, e);
         }
