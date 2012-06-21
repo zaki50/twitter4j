@@ -67,6 +67,8 @@ public class ImageUploadFactory {
             defaultMediaProvider = TWIPL;
         } else if ("posterous".equals(mediaProvider)) {
             defaultMediaProvider = POSTEROUS;
+        } else if ("viame".equals(mediaProvider)) {
+            defaultMediaProvider = VIAME;
         } else {
             throw new IllegalArgumentException("unsupported media provider:" + mediaProvider);
         }
@@ -138,6 +140,8 @@ public class ImageUploadFactory {
             return new TwiplUpload(conf, apiKey, oauth);
         } else if (mediaProvider == POSTEROUS) {
             return new PosterousUpload(conf, oauth);
+        } else if (mediaProvider == VIAME) {
+            return new ViameUpload(conf, apiKey, oauth);
         } else {
             throw new AssertionError("Unknown provider");
         }
